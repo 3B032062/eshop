@@ -5,6 +5,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,6 +43,10 @@ Route::resource('products',ProductController::class);
  * product.destroy:DELETE 'products/{product}' , ProductController@destroy , 刪除某一產品
  *
  */
+
+Route::resource('categories.products', CategoryProductController::class)->only([
+    'index',
+]);
 
 Route::resource('cart_items', CartItemController::class);
 Route::resource('orders', OrderController::class);
