@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use function Symfony\Component\Translation\t;
 use App\Models\CartItem;
 use App\Http\Requests\StoreCartItemRequest;
 use App\Http\Requests\UpdateCartItemRequest;
@@ -11,6 +12,12 @@ class CartItemController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function authorize(): bool
+    {
+        return true;
+    }
+
     public function index()
     {
         if (isset(auth()->user()->cartItems)) {
@@ -35,7 +42,9 @@ class CartItemController extends Controller
      */
     public function store(StoreCartItemRequest $request)
     {
-        //
+
+        auth()->user()->cartItems()->create($request->all());
+        return back();
     }
 
     /**

@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class CartItem extends Model
 {
     use HasFactory;
+    public $fillable=[
+        'product_id',
+    ];
+
 
     public function user()
     {
