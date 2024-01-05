@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,12 +13,16 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+use App\Models\User;
 Route::get('/', function () {
-    return view('welcome');
+    //return view('welcome');
+    $user = new user();
+    $user ->name = 'aa';
+    $user ->email ='12223';
+
 });
 
-use App\Http\Controllers\ProductController;
+
 Route::resource('products',ProductController::class);
 /*
  * product.index:GET '/' ProductController@index , 列出所有產品
@@ -35,3 +40,15 @@ Route::resource('products',ProductController::class);
  * product.destroy:DELETE 'products/{product}' , ProductController@destroy , 刪除某一產品
  *
  */
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';

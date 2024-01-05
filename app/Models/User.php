@@ -43,7 +43,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function cart_items()
+    public function cartItems()
     {
         return $this->hasMany(CartItem::class);
     }
