@@ -13,7 +13,13 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        if (isset(auth()->user()->orders)) {
+            $orders = auth()->user()->orders;
+        }
+        $data = [
+            'orders'=>$orders,
+        ];
+        return view('orders.index', $data);
     }
 
     /**
@@ -37,7 +43,10 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        $data = [
+            'order'=>$order,
+        ];
+        return view('orders.show', $data);
     }
 
     /**
