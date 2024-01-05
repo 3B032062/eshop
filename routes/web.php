@@ -33,5 +33,5 @@ Route::resource('products',ProductController::class);
  * product.update:PUT|PATCH 'products/{product}' , ProductController@update , 更新某一產品
  *
  * product.destroy:DELETE 'products/{product}' , ProductController@destroy , 刪除某一產品
- * 
+ *
  */
