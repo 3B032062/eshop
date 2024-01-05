@@ -13,7 +13,13 @@ class CartItemController extends Controller
      */
     public function index()
     {
-        //
+        if (isset(auth()->user()->cartItems)) {
+            $cartItems = auth()->user()->cartItems;
+        }
+        $data = [
+            'cartItems'=>$cartItems,
+        ];
+        return view('cart_items.index', $data);
     }
 
     /**
