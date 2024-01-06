@@ -13,16 +13,10 @@ class CartItemController extends Controller
      * Display a listing of the resource.
      */
 
-    public function authorize(): bool
-    {
-        return true;
-    }
 
     public function index()
     {
-        if (isset(auth()->user()->cartItems)) {
-            $cartItems = auth()->user()->cartItems;
-        }
+        $cartItems = auth()->user()->cartItems;
         $data = [
             'cartItems'=>$cartItems,
         ];

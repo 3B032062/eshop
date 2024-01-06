@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\CartItemController;
+use App\Http\Controllers\CategoryProductController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +22,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('categories.products', CategoryProductController::class)->only([
+    'index',
+]);
+
+Route::resource('cart_items', CartItemController::class);
+Route::resource('orders', OrderController::class);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::resource('products', ProductController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
